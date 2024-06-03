@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block main_content %}
+  {% include 'app/slider.html' %}
+
+  <div>
+    <div>Sản phẩm</div>
+
+    <div>
+      <!-- List product -->
+      {% for product in products|slice:':3' %}
+        <div>
+          <img src="{{ product.ImageURL }}" alt="" />
+          <div>
+            <div>{{ product.name }}</div>
+            <div>{{ product.code }}</div>
+            <div>{{ product.price|floatformat:0 }} VNĐ</div>
+            <div>
+              <form method="post">
+                {% csrf_token %}
+                <button data-product="{{ product.id }}" data-action="add">Thêm vào giỏ hàng</button>
+                <button data-product="{{ product.id }}"><a href="{% url 'detail' %}">Xem</a></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if messages %}
+    {% for message in messages %}
+      <script>
+        alert('{{ message }}')
+      </script>
+    {% endfor %}
+{% endif %}
+{% endblock %}

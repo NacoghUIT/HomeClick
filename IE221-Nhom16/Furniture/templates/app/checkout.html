@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block checkout_content %}
+  <div>
+    <div>
+      <div>
+        <div>
+          <a href="{% url 'cart' %}">←Quay lại giỏ hàng</a>
+          <hr />
+          <h3>Đơn hàng</h3>
+          <hr />
+          {% for item in items %}
+            <div>
+              <div>
+                <img src="{{ item.product.ImageURL }}" />
+              </div>
+              <div>
+                <p>{{ item.product.name }}</p>
+              </div>
+              <div>
+                <p>{{ item.product.price|floatformat:0 }} VNĐ</p>
+              </div>
+              <div>
+                <p>{{ item.quantity }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <h5>Mã giảm giá</h5>
+            <div>
+              <input type="text" name="sale" placeholder="Nhập mã giảm giá.." />
+              <p >Áp dụng</p>
+            </div>
+          </div>
+          <h5>Tổng tiền: {{ order.get_cart_total|floatformat:0 }} VNĐ</h5>
+          <h5>Giảm được: 0 VNĐ</h5>
+          <p>Tiếp tục thanh toán</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

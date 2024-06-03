@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+  </head>
+  <body>
+    <!-- Menu -->
+    <div>
+      <nav>
+        <div>
+          <!-- Img Logo -->
+          <a href="{% url 'home' %}"><img src="{% static 'images/imgLogo.png' %}" alt="imgLogo" /></a>
+          <button type="button"></button>
+
+          <!-- Menu -->
+          <div>
+            <ul>
+              <li>
+                <a href="{% url 'home' %}">Trang chủ</a>
+              </li>
+              <li>
+                <a href="{% url 'product' %}">Sản phẩm</a>
+              </li>
+              <li>
+                <a href="{% url 'cart' %}">Giỏ hàng</a>
+              </li>
+            </ul>
+
+            <!-- SearchBox -->
+            <form method="POST" action="{% url 'search_page' %}">
+              {% csrf_token %}
+              <input type="search" placeholder="Tìm kiếm" name="searched" />
+              <button type="submit"></button>
+            </form>
+
+            <!-- Login -->
+            <div>
+              <ul>
+                <li>
+                  <a href="{% url 'checkout' %}"><img src="{% static 'images/imgTruck.png' %}" alt="Truck" /></a>
+                </li>
+                <li>
+                  <a href="{% url 'cart' %}"><img src="{% static 'images/imgCart.png' %}" alt="Cart" /></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div>
+        <div>Tìm hiểu thêm</div>
+        <button>✖</button>
+      </div>
+    </div>
+
+    <!-- Main body -->
+    {% block main_content %}
+    {% endblock %}
+
+    {% block product_content %}
+    {% endblock %}
+
+    {% block checkout_content %}
+    {% endblock %}
+
+    {% block cart_content %}
+    {% endblock %}
+
+    {% block product_detail %}
+    {% endblock %}
+
+    {% block search_page %}
+    {% endblock %}
+    <!-- Footer -->
+    <footer>
+      <div>
+        <div>
+          <img src="{% static 'images/imgLogo-1.png' %}" />
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>THÔNG TIN CÔNG TY</div>
+          <ul>
+            <li>Giới thiệu</li>
+            <li>Tuyển dụng</li>
+          </ul>
+        </div>
+        <div>
+          <div>HỖ TRỢ KHÁCH HÀNG</div>
+          <ul>
+            <li>Hướng dẫn mua hàng</li>
+            <li>Hướng dẫn thanh toán</li>
+            <li>Chính sách khách hàng thân thiết</li>
+          </ul>
+        </div>
+        <div>
+          <div>CHÍNH SÁCH BÁN HÀNG</div>
+          <ul>
+            <li>Điều khoản sử dụng</li>
+            <li>Chính sách đổi,trả & bảo hành</li>
+            <li>Chính sách giao hàng</li>
+            <li>Chính sách bảo mật</li>
+          </ul>
+        </div>
+        <div>
+          <div>LIÊN HỆ</div>
+          <ul>
+            <li>info@homeclick.vn</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <ul>
+              <li>homeclick.vn - Trang mua sắm chuyên ngành NỘI THẤT</li>
+            </ul>
+          </div>
+          <div>
+            <img src="{% static 'images/img_BCT.png' %}" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block cart_content %}
+  <div>
+    <div>
+      <h3>Đơn hàng của bạn</h3>
+      <div>
+        <div>
+          <div>
+            <strong>Sản phẩm</strong>
+          </div>
+          <div>
+            <strong>Giá</strong>
+          </div>
+          <div>
+            <strong>Số lượng</strong>
+          </div>
+          <div>
+            <strong>Tổng cộng</strong>
+          </div>
+        </div>
+
+        {% for item in items %}
+          <div>
+            <div>
+              <img src="{{ item.product.ImageURL }}" alt="{{ item.product.name }}" />
+              <p>{{ item.product.name }}</p>
+            </div>
+            <div>
+              <p>{{ item.product.price|floatformat:0 }} VNĐ</p>
+            </div>
+            <div>
+              <p>{{ item.quantity }}</p>
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  <img data-product="{{ item.product.id }}" data-action="add" src="{% static 'images/arrow-up.png' %}" alt="Increase quantity" />
+                  <img data-product="{{ item.product.id }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="Increase quantity" />
+                </form>
+              </div>
+            </div>
+            <div>
+              <p>{{ item.get_total|floatformat:0 }} VNĐ</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div>
+        <a href="{% url 'home' %}">← Tiếp tục mua sắm</a>
+        <table>
+          <tr>
+            <th>
+              <h5>Sản phẩm: <strong>{{ order.get_cart_items }}</strong></h5>
+            </th>
+            <th>
+              <h5>Tổng cộng: <strong>{{ order.get_cart_total|floatformat:0 }} VNĐ</strong></h5>
+            </th>
+            <th>
+              <a href="{% url 'checkout' %}">Thanh toán</a>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
